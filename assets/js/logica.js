@@ -5,22 +5,28 @@ const escribir = document.querySelector('#h3');
 
 // variables
 let i = 0
-const val = ['slow', 'medium', 'fast'];
+const val = [];
     
 
 // funciones
-const valorX = () => {   
+const toggle = (...valores) => {    
+    
+    for(valor in valores){
+        val.push(valores[valor]);
+    }
+   
     if( i < val.length-1 ){
         return i += 1;
     }
-        return i = 0;    
-        
+        return i = 0;           
 }
 
 const toogleButton = ({target}) => {     
-    valorX();
+    //agregamos las opciones que queremos al toogle
+    toggle('slow','medium','fast');
+    
     target.setAttribute('multi-valor', val[i])
-    console.log(target.getAttribute('multi-valor'));
+    console.log(event.target.getAttribute('multi-valor'));
     escribir.innerHTML = `valor: ${val[i]}`
 }
 

@@ -4,29 +4,35 @@
 
 // selectores
 const boton1 = document.querySelector('#btn1')
-const boton2 = document.querySelector('#btn2')
-const boton3 = document.querySelector('#btn3')
 const text = document.querySelector('#h3');
 
-function toggle(...vals) {
-  let unset = {}
-  let cur = unset
-
-  return function next() {
-    if (cur != unset) {
-      vals.push(cur)
+function once(fn) {
+  let ejec  = false;
+  console.log(ejec)
+  return function inicioJuego(){
+    
+    if(ejec){
+      console.log('Nop! solo una vez!!');
+      return null;
     }
-    cur = vals.shift()
-    text.innerHTML = `${cur}`;
-    return cur
+    
+    if(typeof fn === 'function'){
+      ejec = true;
+      console.log(ejec);
+      finDelJuego('ganaste!!');   
+    }
   }
 }
 
-let onOff = toggle('off', 'on')
-let velocity = toggle('slow','medium','fast')
-let names = toggle('Hugo', 'Mauro', 'Rodrigo','Dami','Jona','Nacho')
+function finDelJuego(val) {
+  console.log(val)
+    return val;
+}
+
+
 
 // eventos
-boton1.addEventListener('click', onOff);
-boton2.addEventListener('click', velocity);
-boton3.addEventListener('click', names);
+let initGame = once(finDelJuego);
+
+// eventos
+boton1.addEventListener('click', initGame);

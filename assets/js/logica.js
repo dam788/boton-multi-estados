@@ -1,35 +1,32 @@
+/*
+   ********** CLOSURES ***********
+*/
+
 // selectores
-const boton = document.querySelector('#btn');
-const escribir = document.querySelector('#h3');
+const boton1 = document.querySelector('#btn1')
+const boton2 = document.querySelector('#btn2')
+const boton3 = document.querySelector('#btn3')
+const text = document.querySelector('#h3');
 
+function toggle(...vals) {
+  let unset = {}
+  let cur = unset
 
-// variables
-let i = 0
-const val = [];
-    
-
-// funciones
-const toggle = (...valores) => {    
-    
-    for(valor in valores){
-        val.push(valores[valor]);
+  return function next() {
+    if (cur != unset) {
+      vals.push(cur)
     }
-   
-    if( i < val.length-1 ){
-        return i += 1;
-    }
-        return i = 0;           
+    cur = vals.shift()
+    text.innerHTML = `${cur}`;
+    return cur
+  }
 }
 
-const toogleButton = ({target}) => {     
-    //agregamos las opciones que queremos al toogle
-    toggle('slow','medium','fast');
-    
-    target.setAttribute('multi-valor', val[i])
-    console.log(event.target.getAttribute('multi-valor'));
-    escribir.innerHTML = `valor: ${val[i]}`
-}
+let onOff = toggle('off', 'on')
+let velocity = toggle('slow','medium','fast')
+let names = toggle('Hugo', 'Mauro', 'Rodrigo','Dami','Jona','Nacho')
 
-
-// evento
-boton.addEventListener('click', toogleButton);
+// eventos
+boton1.addEventListener('click', onOff);
+boton2.addEventListener('click', velocity);
+boton3.addEventListener('click', names);
